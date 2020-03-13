@@ -1,0 +1,148 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+	<title>Public Bazar</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'mainpage.css'%}">
+	<script type="text/javascript" src = "{%static 'mainpage.js'%}"></script>
+
+</head>
+<body style="background-color:	#E8E8E8; " >
+	<!-------------------------------------nav-bar------------------------------->
+	<nav class="navbar navbar-light " style="background-color:#345A97; height: 120px;">
+  <!-- Navbar content -->
+
+  		<div class="container-fluid" style = "margin-top: 25px">
+		    <div class="navbar-header">
+			  <a class="navbar-brand" href="/" style="color:white;font-size: 45px" >Public Bazar</a>
+			  <div style="color:white;font-size:12px;">A social network </div>
+		    </div>
+		   
+		    <form class="navbar-form navbar-right "   method="post" autocomplete="off">
+		    	{% csrf_token %}
+		     
+		      	<div class = "form1-box ">
+			        <span>
+			        	<input onfocus="remove_err()" type="text" id = "username" class="form-control" placeholder="username" name="username" required>
+			        </span>
+			        <span>
+			        	<input onfocus="check_uname()" style ="margin-left:2px;" type="password" class="form-control" placeholder="password" name="password" required>
+			        </span>
+
+			        <span>
+			        	<input style ="margin-left:1px; "class="btn" type="submit" value = "login"name="login">
+			      		</input>
+			        </span>
+	        	
+	        	<div id="username_err">
+	        		{% if l_p_err%}
+	        			{{l_p_err}}
+	        		{% endif %}
+	        	</div>
+
+	        	<!--form1 ends-->
+     		  </div>
+    		</form>
+	  	</div>
+	</nav>
+<!--------------------------------------------nav-bar ends---------------------------------------------->
+
+
+     <div class="container-custom">
+ 		<div class="col-lg-8">
+ 			<div class = "about"style="">
+ 				
+
+ 				<center><h3>About Us</h3></center>
+ 				<p>
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ 				</p>
+ 				<p>
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ 				</p>
+ 				<p>
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ 				</p>
+ 				<p>
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ 				</p>
+ 				<p>
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+ 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+ 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+ 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+ 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ 				</p>
+ 			</div>
+ 		</div>
+ 		<div class="col-lg-3 	">
+	        	 <div class="container-fluid">
+             		<center style="font-size: 30px">Create new account</center><br>
+             	</div>
+             	<p class ="errors">{{general_err}}</p>
+             	{{ errors }}
+	         <form method="post" autocomplete="off">
+					{% csrf_token %}
+					<p>
+						<input  id = "u" onclick="remove_err(id)" class="form-control form-control-sm"  type="text" placeholder="username" name = "username" required>
+					</p>
+					<p id = "u_err" class = "errors"></p>
+					<p>
+						<input id = "e" onclick="remove_err(id)" onfocus ="check_uname_exist()"class="form-control form-control-sm" type="email" placeholder="Valid-email" name = 'email' required>
+					</p>
+					<p id = "e_err" class = "errors"></p>
+					<!--on focus email I will check if user already exist-->
+					<p>
+						<input onfocus ="check_email_exist()" class="form-control form-control-sm" type="password" placeholder="password" name = 'password1' required>
+					</p>
+
+                    <p><div class="help">
+                    		<ul>
+                    			<li>
+                    			Your password can&#39;t be too similar to your other personal information.</li>
+                    			<li>Your password must contain at least 8 characters.</li>
+                    			<li>Your password can&#39;t be a commonly used password.</li>
+                    			<li>Your password can&#39;t be entirely numeric.</li>
+                    		</ul>
+                    	</div>
+                    
+                
+                	</p>
+					<!--on focus password1 I will check if email already exist-->
+					<p>
+						<input class="form-control form-control-sm" type="password" placeholder="confirm password" name = 'password2' required>
+					</p>
+					<p  class = "errors">{{p_err}}</p>
+
+					 <div class="help">Enter the same password as before, for verification.</div></p>
+					<p>
+						<button type = "signup" class = 'btn btn-primary' name = "signup">Signup</button>
+					</p>
+	         </form>
+     	</div>
+     
+     </div><!--content ends-->
+
+</body>
+</html>

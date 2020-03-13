@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title%} {% endblock title %}</title>
+	<link rel="stylesheet" type="text/css" href="{%static 'bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'root.css'%}">
+	<style type="text/css">
+		.left , .right{
+			border:1px solid black;
+			width:100px;
+			width:auto;
+
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="/home">Writers.. Wrold..</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="/home">Home</a></li>
+	      <li><a href="#">Page 1</a></li>
+	      <li><a href="#">Page 2</a></li>
+	    </ul>
+	  </div>
+	</nav>
+		<div class=" container row left" >	
+			<div class=" col-lg-7 ">
+				hi
+			</div>
+			<div class="  col-lg-5">
+				{{msg}}
+				{% if error %}
+					<div class="alert alert-danger">
+			  			<strong>Danger!</strong> {{error}}
+					</div>
+				{%endif%}
+				<form method="post">
+					{% csrf_token %}
+					<p>
+						<label>Username :</label>
+						<input class="form-control form-control-sm"  type="text" placeholder="username" name = "username">
+					</p>
+					<p>
+						<label>Password :</label>
+						<input class="form-control form-control-sm" type="password" placeholder="password" name = 'password'>
+					</p>
+					<p>
+						<button type = "submit" class = 'btn btn-primary'>submit</button>
+					</p>
+				</form>
+			</div>
+		</div>
+</body>
+</html>

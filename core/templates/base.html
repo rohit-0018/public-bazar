@@ -1,0 +1,51 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+	<title>Social network</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'profile.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'all_people.css'%}">
+</head>
+<body style="background-color: #E6E9ED">
+	<nav class="navbar navbar-light navbar-fixed-top" style="background-color: #345A97;height:60px; ">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand " href="/" style="color:white;padding: 20px;">
+		    	  Welcome {{request.user}}
+		  	  </a><br>
+		      <div style="padding-left:10px;color:yellow;font-size: 8px; ">
+		      		last login : {{request.user.last_login}}
+		      </div>
+		    </div>
+		    <ul class="icons navbar-nav">
+		      <li><a href="/profile/{{request.user.id}}"><img src="{%static 'home.ico'%}"></a></li>
+		      <li><a href="#"><img src="{%static 'newfeed.ico'%}"></a></li>
+		      <li><a href="#">Notificaions</a></li>
+		      <li><a href="#">Messages</a></li>
+		      <li><a href="/exploring">Find People</a></li>
+		    </ul>
+		    <div class="navbar-right" style="margin:15px;">
+		    	<span>
+		    		<a href="/profile/{{request.user.id}}">
+		    			<span class="u_icon">
+		    				<img src="{%static 'user.png'%}">
+		    				<span style="color:white;margin-right:10px;"> {{request.user}}</span>
+		    			</span>
+
+		    		</a>
+		    	</span>
+		    	<span>
+		    		<a href="/logout" style="margin-right:10px;">
+		    			<button class="btn btn-primary">Logout</button>
+		    		</a>
+		    	</span>
+		    </div>
+	  </div>
+	</nav><br><br><br>
+	<!--------------------------------------nav-bar ends Here---------------------------->
+
+	{%block content%}
+	<!-------------------------------------Body Content will come here-------------------->
+	{%endblock content%}
+</body>
+</html>

@@ -1,0 +1,189 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Social network</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'profile.css'%}">
+	<script type="text/javascript" src = "{% static 'jquery.js'%}"></script>
+</head>
+<body style="background-color: #E6E9ED">
+	<nav class="navbar navbar-light navbar-fixed-top" style="background-color: #345A97;height:60px; ">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand " href="/" style="color:white;padding: 20px;">
+		    	  Welcome {{request.user|capfirst}}
+		  	  </a><br>
+		      <div style="padding-left:10px;color:yellow;font-size: 8px; ">
+		      		last login : {{request.user.last_login}}
+		      </div>
+		    </div>
+		    <ul class="icons navbar-nav">
+		      <li><a href="/profile/{{request.user.id}}"><img src="{%static 'home.ico'%}"></a></li>
+		      <li><a href="#"><img src="{%static 'newfeed.ico'%}"></a></li>
+		      <li><a href="#">Notificaions</a></li>
+		      <li><a href="#">Messages</a></li>
+		      <li><a href="/exploring">Reach People</a></li>
+		      <li ><a href="#" >Friend Requests</a></li>
+
+		    </ul>
+		    <div class="navbar-right" style="margin:15px;">
+		    	<span>
+		    		<a href="/profile/{{request.user.id}}">
+		    			<span class="u_icon">
+		    				<img src="{%static 'user.png'%}">
+		    				<span style="color:white;margin-right:10px;"> {{request.user|capfirst}}</span>
+		    			</span>
+
+		    		</a>
+		    	</span>
+		    	<span>
+		    		<a href="/logout" style="margin-right:10px;">
+		    			<button class="btn btn-primary">Logout</button>
+		    		</a>
+		    	</span>
+		    </div>
+	  </div>
+	</nav>
+	{%if request.user.is_authenticated%}
+		<div class="container-fluid " style="position: relative;top:80px;">
+			<div class="col-lg-3  custom  " style="padding:0px"><!--dont tuch cuz this is main column-->		
+				<div class="cover-pic ">
+
+					<div class="profile-pic">
+						
+						<p style="position:absolute;right:15px;bottom:10px;margin:0px;">
+							<a href="#" class="" style="text-align: center;font-size: 10px;">
+								Add photo+ 
+							</a>
+						</p>
+					</div>
+					
+					<div>
+						<p><a href="#" style="font-size: 10px;	">Add cover</a></p>
+					</div>
+				</div>
+			
+
+			</div>	
+			<div class="col-lg-6" style="background-color:#E6E9ED; ">
+				<h3 style="color:purple;text-align: center;border-bottom:2px solid purple;">Time line</h3>
+				<div class="">
+					{% if posts%}
+
+						{% for post in posts %}
+							<div class="post">
+								<p><strong class="post-uname">{{post.user.username|capfirst}}</strong></p>
+								<h3 class="post-heading">{{post.content_type}}</h3>
+								<br>
+								<p class="post-content">{{post.content}}</p>
+								<br>
+							</div>
+							<br>
+
+						{% endfor %}
+					{% else %}
+						<h3 style="color:blue">Add posts</h3>
+					{%endif%}
+				</div>
+			
+			</div>
+			<div class="col-lg-2 " style="">
+				<div class="functions">
+					<ul>
+						<li>
+							<a id = "myBtn"> +Create Post </a>
+						</li>
+						<li>
+							<a href="">Settings </a>
+						</li>
+
+					</ul>
+
+				</div>
+				<div class ="friend-wrapper ">
+					<h3>Friends</h3>
+						{%if friends %}
+							{%for f in friends %}
+								<div class="friend-box">
+									<a href="/display/{{f.friend.id}}">
+										{{f.friend.username|capfirst}}
+									</a><br>
+									online : {{f.friend.is_active}}
+								</div>
+							{% endfor %}
+									
+						{% else %}
+								
+							<div class="friend-box">No friends</div>
+						{% endif %}
+				</div>
+			</div>			
+		</div><!--container div-->
+
+		<!-- The Modal popup -->
+		<div id="myModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				
+				<div class="form-wrapper1">
+					<form action="/savepost"  method="post" autocomplete ="off"  >
+						{% csrf_token %}
+						<input class="form-control form-control-sm" type="text" name="content_type" placeholder="Heading"><br>
+
+						<textarea class="form-control form-control-sm" name="content" rows="8" cols="50" placeholder="Content"></textarea><br>
+						<button class= "btn btn-primary" type="submit" name="button">Post</button>
+					</form>
+					<div style="font-size:10px;color:blue;float:right">click outside to exit</div>
+				</div><!--form wrapper-->
+			</div>
+
+		</div>
+		<!-- The model poppup ends -->
+
+
+
+	{%else%}
+		<h1>You are not logged in </h1>
+	{%endif%}
+
+
+
+
+
+
+<!-- Script for the modal popup-->
+<script type="text/javascript">
+		// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	//var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	//span.onclick = function() {
+	  //modal.style.display = "none";
+	//}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
+
+</body>
+</html>
+
+

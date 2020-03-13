@@ -1,0 +1,46 @@
+.left , .border{
+	border:1px solid black;
+
+}
+.color{
+	color:white;
+}
+.btn:hover{
+	opacity: 0.9;
+}
+.about{
+	padding:10px;
+	background-color: white;
+	margin-left:20px;
+	margin-right: 20px;
+}
+.container-custom{
+	width: auto;
+	height:auto;
+}
+.form1-box{
+	width:auto;
+	height:auto;
+	margin-bottom: -10px;
+	
+}
+.navbar-right{
+	width:auto;
+}
+#username_err{
+	color: yellow;
+	margin-top: 0px;
+}
+
+.errors{
+	color:red;
+	font-size: 15px;
+}
+li {
+	font-size: 10px;
+	color:gray;
+}
+.help{
+	font-size: 10px;
+	color:gray;
+}
